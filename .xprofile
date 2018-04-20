@@ -1,0 +1,46 @@
+#!/bin/bash
+# File Used by display manager
+
+setxkbmap de #German Layout
+[[ -f ~/.Xresources ]] && xrdb -merge -I$HOME ~/.Xresources
+eval `ssh-agent -s`
+xinput --disable "SynPS/2 Synaptics TouchPad"
+xinput set-prop "TPPS/2 IBM TrackPoint" "275" "0.75" #evdev
+
+usermodmap=$HOME/.Xmodmap
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+
+#----------------------------------------------------------------------------------------#
+
+###Export to ~/.config/i3/config
+#bash ~/.bin/localbin/fehbg & #set the backround
+#conky & #Desktop Widget 
+#sh redshift-gtk -t 6500:4600 & #enable colour switch
+#/usr/lib/notification-daemon-1.0/notification-daemon & # Start notification-deamon
+#compton -b --backend glx --vsync opengl-mswc & #Composite
+#xmodmap ~/.Xmodmap #enable Keyboard configuration
+#xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape' #CAPS wird als ESC genutz
+#fehbg &
+
+
+###Unused
+#volumeicon & #Set a small icon for volume
+#exec dbus-launch --exit-with-session --sh-syntax i3 #??
+#export QT_SCALE_FACTOR=0.75 #Gegen SeafileBug
+#xcompmgr & #transparency
+#if [ -n "$(find /dev/input/by-id/ -name '*mouse*')" ]; then
+	#synclient TouchpadOff=1
+#else 
+	#xinput set-button-map 11 1 2 3 5 4 6 7 8 9 10 11 12
+#fi
+#synclient TouchpadOff=1
+#synclient TapButton1=1
+#xrdb ~/.Xresources #Load the Xresources (z.B rofi) thems
+#xbinkeys
+#feh --bg-scale /home/marcel/Bilder/HD/11.jpg &
+#synclient TouchpadOff=1
+#synclient MinSpeed=1.5 && synclient MaxSpeed=3
+#xinput --set-prop "12" "Device Accel Constant Deceleration" 0.65 #Set Trackpoint speed

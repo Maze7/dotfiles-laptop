@@ -1,0 +1,17 @@
+rofi.color-enabled: true
+rofi.color-window: #2f343f, #2f343f, #2f343f
+rofi.color-normal: #2f343f, #f3f4f5, #2f343f, #586e75, #9575cd
+rofi.color-active: #394c77, #268bd2, #eee8d5, #268bd2, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
+rofi.fake-transparency: true
+!rofi.fake-background: ~/screenshot.png
+
+Xautolock.time: 7
+Xautolock.locker: /home/marcel/.bin/scripts/lock.sh
+Xautolock.killtime: 30
+Xautolock.killer: systemctl suspend
+!Xautolock.notify: 20
+!Xautolock.notifier: notify-send Lock in 10 Minutes
+Xautolock.detectsleep: true
+Xautolock.secure: true
+Xautolock.noclose: true
