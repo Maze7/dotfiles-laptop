@@ -1,0 +1,8 @@
+#!/bin/sh
+RANGE=24
+#RANGE=21
+number=$RANDOM
+let "number %= $RANGE"
+#feh --bg-scale '/home/marcel/Bilder/arch/bild'$number'.jpg'
+feh --bg-scale '/home/marcel/Bilder/HD/'$number'.jpg'
+#feh  --bg-scale '/home/marcel/Bilder/current.jpg' 
