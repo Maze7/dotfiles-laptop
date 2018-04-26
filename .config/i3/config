@@ -219,27 +219,29 @@ bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
 
 #Window Colour
 client.focused          $bg-color           $bg-color          $text-color          #00ff00
-client.unfocused        #073642             #073642            $inactive-text-color #00ff00
+client.unfocused        $unfocused           $unfocused         $inactive-text-color #00ff00
 #Changed $inactive-bg-color to #073642 
-client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color  #00ff00
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
 
-set $bg-color 	         #2f343f
-set $inactive-bg-color   #2f343f
+set $bg-color 	         #0a4c5c
+# ehemal #073642 => https://www.w3schools.com/colors/colors_picker.asp
+set $inactive-bg-color   #073642
+set $unfocused			 #2f343f 
 #switch the 2f343f with 073642 
 set $text-color          #f3f4f5
 set $inactive-text-color #676E7D
-set $urgent-bg-color #E53935
+set $urgent-bg-color	 #E53935
 
 #client.focused #6c71c4 #6c71c4 #fdf6e3 #6c71c4
 #client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 #client.unfocused #073642 #073642 #93a1a1 #586e75
 
 #client.unfocused #6c71c4 #6c71c4 #fdf6e3 #6c71c4
-client.focused #2f343f #2f343f #eee8d5 #6c71c4
+#client.focused #2f343f #2f343f #eee8d5 #6c71c4
 #client.focused #073642 #073642 #eee8d5 #6c71c4
-client.focused_inactive #073642 #073642 #93a1a1 #586e75
-client.urgent #d33682 #d33682 #fdf6e3 #dc322f
+#client.focused_inactive #073642 #073642 #93a1a1 #586e75
+#client.urgent #d33682 #d33682 #fdf6e3 #dc322f
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -285,14 +287,13 @@ for_window [instance="xfce4-terminal"] move scratchpad
 for_window [instance="pamac-manager"] floating enable
 
 # Disable Borders
-#for_window [instance="firefox"] border pixel 1
+for_window [class="^.*"] border pixel 5
 #for_window [instance="termite"] border pixel 1
 #for_window [instance="chromium"] border pixel 1
-for_window [class="^.*"] border pixel 1
 
 # Autostart applications
 exec --no-startup-id redshift-gtk -t 6500:4600
-exec --no-startup-id polybar bottom
+exec --no-startup-id polybar top
 exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
 exec --no-startup-id conky
 exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
