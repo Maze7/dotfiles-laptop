@@ -285,6 +285,7 @@ bindsym $mod+End mode "$mode_system"
 for_window [instance="keepass"] move scratchpad
 for_window [instance="xfce4-terminal"] move scratchpad
 for_window [instance="pamac-manager"] floating enable
+for_window [title="wine"] floating enable
 
 # Disable Borders
 for_window [class="^.*"] border pixel 5
