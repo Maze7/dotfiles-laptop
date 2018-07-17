@@ -292,18 +292,6 @@ for_window [class="^.*"] border pixel 5
 #for_window [instance="termite"] border pixel 1
 #for_window [instance="chromium"] border pixel 1
 
-# Autostart applications
-exec --no-startup-id redshift-gtk -t 6500:4600
-exec --no-startup-id polybar top
-exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
-exec --no-startup-id conky
-exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
-exec --no-startup-id keepass
-exec --no-startup-id xfce4-terminal
-exec --no-startup-id termite
-exec --no-startup-id nm-applet
-#exec --no-startup-id ssh-agent -s
-
 # Application sort
 for_window [class="Firefox"] move container to workspace $workspace2
 for_window [class="VirtualBox Manager"] move container to workspace $workspace8
@@ -311,10 +299,23 @@ for_window [class="Thunderbird"] move container to workspace $workspace9
 for_window [class="Hexchat"] move container to workspace $workspace9
 for_window [class="Seafile Client"] move container to workspace $workspace10
 
-# Scripts / Load
-exec --no-startup-id setxkbmap de
-exec --no-startup-id fehbg
-exec --no-startup-id xmodmap ~/.Xmodmap
+# Start-up applications
+exec --no-startup-id redshift-gtk -t 6500:4600
+exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
+exec --no-startup-id conky
+exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
+exec --no-startup-id keepass
+exec --no-startup-id xfce4-terminal
+exec --no-startup-id termite
+exec --no-startup-id nm-applet
+
+# Start-up / reload applications
+exec_always --no-startup-id $HOME/.bin/scripts/monitor-setup.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id compton --config ~/.config/i3/compton.conf -b
+exec_always --no-startup-id setxkbmap de
+exec_always --no-startup-id fehbg
+exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 # i3-gabs config
 smart_borders on
