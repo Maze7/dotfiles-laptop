@@ -1,0 +1,53 @@
+#!/bin/sh
+GROUP=$1
+LOCATION=$2
+
+if [ ! "$LOCATION" ];then
+   LOCATION="home"
+fi
+
+if [ ! "$LOCATION" ];then
+   LOCATION="home"
+fi
+
+
+if [ "$GROUP" == "default" ]; then
+	echo "> Starting default setup"
+
+	echo ">> running monitor setup..."
+	$HOME/.screenlayout/default.sh
+
+	echo ">> restart i3"
+	i3-msg restart
+	
+# Gruppe Hildesheim
+elif [ "$GROUP" == "hi" ]; then
+	#### Hildesheim Home
+	if [ "$LOCATION" == "home" ]; then
+		echo "> Starting setup for hildesheim-home"
+	
+		echo ">> running monitor setup..."
+		$HOME/.bin/scripts/setup/hi-home.screenlayout
+
+		echo ">> running network setup via networkmanager..."
+		nmcli con up uuid "585bc297-c19d-30ce-a344-a26e32bc6034"
+	
+		echo ">> running i3 setup..."
+		$HOME/.bin/scripts/setup/hi-home.i3script
+
+	#### Hildesheim Arbeit
+	elif [ "$LOCATION" == "arbeit" ]; then 
+		echo "Starting setup for hildesheim-arbeit"
+
+	#### nothing
+	else 
+		echo "no valid location in group $GROUP found"
+	fi
+
+#Grupp Vardegötzen
+elif [ "$GROUP" == "va" ]; then
+	echo "nothing to-do "
+else 
+	echo "no valid group found"
+fi
+
