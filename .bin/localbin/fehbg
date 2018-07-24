@@ -1,8 +1,23 @@
 #!/bin/sh
-RANGE=24
-#RANGE=21
+ACTION=$1
+if [ ! "$ACTION" ]; then
+	ACTION="hd"
+	echo "Depricated - pls define action"
+	echo "available: <hd>, <arch>"
+fi
+
+if [ "$ACTION" == "hd" ]; then
+	PICPATH="$HOME/Bilder/HD/"
+	RANGE=24
+elif [ "$ACTION" == "arch" ]; then
+	RANGE=21
+	PICPATH="$HOME/Bilder/arch/bild"
+else
+	echo 
+	#TODO
+fi
+
 number=$RANDOM
 let "number %= $RANGE"
-#feh --bg-scale '/home/marcel/Bilder/arch/bild'$number'.jpg'
-feh --bg-scale '/home/marcel/Bilder/HD/'$number'.jpg'
-#feh  --bg-scale '/home/marcel/Bilder/current.jpg' 
+#echo $PICPATH$number".jpg"
+feh --bg-scale $PICPATH$number".jpg"

@@ -314,7 +314,7 @@ exec --no-startup-id redshift-fix
 #exec_always --no-startup-id $HOME/.bin/scripts/monitor-setup.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #exec_always --no-startup-id setxkbmap de
-exec_always --no-startup-id fehbg
+exec_always --no-startup-id fehbg hd
 exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 # i3-gabs config
