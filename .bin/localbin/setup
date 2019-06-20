@@ -1,62 +1,67 @@
 #!/bin/sh
-GROUP=$1
-LOCATION=$2
+group=$1
+location=$2
+AVAILABLE_GROUPS=(default privat work) # Only used for help
 
-if [ ! "$LOCATION" ];then
-   LOCATION="home"
-fi
+main() {
+	#if [ ! "$LOCATION" ];then
+	#   LOCATION="home"
+	#fi
+	case $group in
+		default	| d)
+			setup_default
+			;;
+		priv | privat | p)
+			local P_LOCALTIONS=(hihome testlo)
+			;;
+		arbeit | a | work)
+			local P_LOCALTIONS=(sse rz)
+			;;
+	esac
+	containsElement "$location" "${P_LOCALTIONS[@]}"
+	if [[ "$?" -eq "1" ]]; then
+		setup_"$group"_"$location"
+	else
+		echo "Invalid location or group; Available groups: ${AVAILABLE_GROUPS[@]}"	
+	fi
+}
 
-if [ ! "$LOCATION" ];then
-   LOCATION="home"
-fi
+function containsElement {
+	local e match="$1"
+	shift
+	for e; do echo $e && [[ "$e" == "$match" ]] && return 1; done
+	return 0
+}
 
-
-if [ "$GROUP" == "default" ]; then
+function setup_priv_hihome {
+	echo "> Starting setup for hildesheim-home"
+	echo ">> running monitor setup..."
+#	$HOME/.bin/scripts/setup/hi-home.screenlayout
+	echo ">> running network setup via networkmanager..."
+#	nmcli con up uuid "585bc297-c19d-30ce-a344-a26e32bc6034"
+	echo ">> running i3 setup..."
+#	$HOME/.bin/scripts/setup/hi-home.i3script
+}
+function setup_arbeit_rz {
+	echo "Starting setup for hildesheim-arbeit"
+	echo ">> running networksetup via networkmanager..."
+	nmcli con up uuid "e8ca4590-af96-4d4e-8c15-4e144b789998"
+	echo ">> running monitor setup..."
+	$HOME/.bin/scripts/setup/hi-arbeit.screenlayout
+	echo ">> running i3 setup..."
+	$HOME/.bin/scripts/setup/hi-arbeit.i3script
+}
+function setup_arbeit_sse {
+	echo "hi"
+}
+function setup_default {
 	echo "> Starting default setup"
-
 	echo ">> running monitor setup..."
 	$HOME/.screenlayout/default.sh
-
 	echo ">> restart i3"
 	i3-msg restart
-	
-# Gruppe Hildesheim
-elif [ "$GROUP" == "hi" ]; then
-	#### Hildesheim Home
-	if [ "$LOCATION" == "home" ]; then
-		echo "> Starting setup for hildesheim-home"
-	
-		echo ">> running monitor setup..."
-		$HOME/.bin/scripts/setup/hi-home.screenlayout
+}
 
-		echo ">> running network setup via networkmanager..."
-		nmcli con up uuid "585bc297-c19d-30ce-a344-a26e32bc6034"
-	
-		echo ">> running i3 setup..."
-		$HOME/.bin/scripts/setup/hi-home.i3script
-
-	#### Hildesheim Arbeit
-	elif [ "$LOCATION" == "arbeit" ]; then 
-		echo "Starting setup for hildesheim-arbeit"
-		
-		echo ">> running networksetup via networkmanager..."
-		nmcli con up uuid "e8ca4590-af96-4d4e-8c15-4e144b789998"
-
-		echo ">> running monitor setup..."
-		$HOME/.bin/scripts/setup/hi-arbeit.screenlayout
-
-		echo ">> running i3 setup..."
-		$HOME/.bin/scripts/setup/hi-arbeit.i3script
-
-	#### nothing
-	else 
-		echo "no valid location in group $GROUP found"
-	fi
-
-#Grupp Vardegötzen
-elif [ "$GROUP" == "va" ]; then
-	echo "nothing to-do "
-else 
-	echo "no valid group found"
-fi
-
+##Start##
+main
+##Start##
