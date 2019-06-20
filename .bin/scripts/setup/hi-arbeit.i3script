@@ -1,0 +1,4 @@
+i3-msg "workspace 1, move workspace to output HDMI2"
+i3-msg "workspace 2, move workspace to output HDMI1"
+
+i3-msg restart
