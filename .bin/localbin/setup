@@ -1,26 +1,36 @@
 #!/bin/sh
+
+# Parameters
 group=$1
 location=$2
 
+# Config
+set -u
+set -b
+#set -n # developing mode
+
+# Statics
 AVAILABLE_GROUPS=(default privat work) # Only used for help
 SCRIPT_DIR=$HOME/.bin/scripts/setup/
 NM_COMMAND_SET="nmcli con up uuid"
 
+# Main Method
 main() {
-	#if [ ! "$LOCATION" ];then
-	#   LOCATION="home"
-	#fi
 	case $group in
 		default	| d)
 			setup_default
 			;;
 		priv | privat | p)
 			group=priv
-			local P_LOCALTIONS=(hihome testlo)
+			local P_LOCALTIONS=(hihome)
 			;;
 		arbeit | a | work)
 			group=arbeit
 			local P_LOCALTIONS=(sse rz)
+			;;
+		*)
+			echo "Invalid group. Available groups: ${AVAILABLE_GROUPS[@]}"
+			exit 1
 			;;
 	esac
 	containsElement "$location" "${P_LOCALTIONS[@]}"
@@ -28,7 +38,8 @@ main() {
 		echo "> Starting setup for $location"
 		setup_"$group"_"$location"
 	else
-		echo "Invalid location or group; Available groups: ${AVAILABLE_GROUPS[@]}"	
+		# location is not in P_LOCATION
+		echo "Invalid location. Available location in "$group": ${P_LOCALTIONS[@]}" 
 	fi
 }
 
@@ -57,7 +68,7 @@ function setup_arbeit_rz {
 }
 function setup_arbeit_sse {
 	echo ">> running networksetup via networkmanager..."
-	nmcli con up uuid "e8ca4590-af96-4d4e-8c15-4e144b789998"
+	nmcli con up uuid "9e588387-345b-4763-9ac9-005e5b7b9187"
 	echo ">> running monitor setup..."
 	$SCRIPT_DIR/arbeit-sse.screenlayout
 	#echo ">> running i3 setup..."
