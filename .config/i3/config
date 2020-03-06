@@ -32,6 +32,7 @@ floating_modifier $mod
 for_window [class="mono"] floating enable
 for_window [class="seafile-applet"] floating enable
 for_window [class="seafile*"] floating enable
+for_window [class="GameCollection"] floating enable
 
 #Set the default locker
 set $Locker i3lock-wrapper-p && sleep 1
@@ -299,6 +300,13 @@ for_window [class="Thunderbird"] move container to workspace $workspace9
 for_window [class="Hexchat"] move container to workspace $workspace9
 for_window [class="Seafile Client"] move container to workspace $workspace10
 
+# Start-up / reload applications
+#exec_always --no-startup-id $HOME/.bin/scripts/monitor-setup.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#exec_always --no-startup-id setxkbmap de
+exec_always --no-startup-id fehbg hd
+exec_always --no-startup-id xmodmap ~/.Xmodmap
+
 # Start-up applications
 exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
 exec --no-startup-id conky
@@ -308,14 +316,8 @@ exec --no-startup-id xfce4-terminal
 exec --no-startup-id termite
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift-fix
+exec --no-startup-id blueman-applet
 #exec_always --no-startup-id redshift-gtk -t 6500:4600
-
-# Start-up / reload applications
-#exec_always --no-startup-id $HOME/.bin/scripts/monitor-setup.sh
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-#exec_always --no-startup-id setxkbmap de
-exec_always --no-startup-id fehbg hd
-exec_always --no-startup-id xmodmap ~/.Xmodmap
 
 # i3-gabs config
 smart_borders on
