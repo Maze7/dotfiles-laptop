@@ -8,9 +8,9 @@ fi
 
 if [ "$ACTION" == "hd" ]; then
 	PICPATH="$HOME/Bilder/HD/"
-	RANGE=24
-elif [ "$ACTION" == "arch" ]; then
 	RANGE=21
+elif [ "$ACTION" == "arch" ]; then
+	RANGE=25
 	PICPATH="$HOME/Bilder/arch/bild"
 else
 	echo 

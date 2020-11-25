@@ -28,13 +28,13 @@ fi
 #[ -f /etc/xprofile ] && . /etc/xprofile
 #[ -f ~/.xprofile ] && . ~/.xprofile
 
-# start some nice programs
+# keyboard settings
+setxkbmap de
+setxkbmap -option caps:escape 
 xinput --disable "SynPS/2 Synaptics TouchPad"
 #xinput set-prop "TPPS/2 IBM TrackPoint" "287" "-0.3" #libinput
 #xinput set-prop "TPPS/2 IBM TrackPoint" "275" "0.75" #evde
-xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.75
-
-#
+xinput set-prop "TPPS/2 IBM TrackPoint" "Device Accel Constant Deceleration" 0.7
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
@@ -45,4 +45,3 @@ fi
 
 # Least
 exec i3
-#exec gnome-session
