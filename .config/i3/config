@@ -29,11 +29,6 @@ font pango:monospace 9
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-for_window [class="mono"] floating enable
-for_window [class="seafile-applet"] floating enable
-for_window [class="seafile*"] floating enable
-for_window [class="GameCollection"] floating enable
-
 #Set the default locker
 set $Locker i3lock-wrapper-p && sleep 1
 
@@ -69,10 +64,6 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
-
-# Other Scratchpad
-bindsym $mod+Shift+Return [instance="xfce4-terminal"] scratchpad show
-bindsym $mod+k [instance="keepass"] scratchpad show
 
 # Show the sup-mail scratchpad window, if any.
 #bindsym $mod+g [title="^Sup ::"] scratchpad show
@@ -281,12 +272,16 @@ mode "$mode_system" {
 bindsym $mod+End mode "$mode_system"
 
 
-# Default floating windows or Scratchpad
+# Default floating windows and scratchpad
+# find with xprop WM_CLASS 
 #for_window [instance="xfce4-terminal"] floating enable border pixel 0
 for_window [instance="keepass"] move scratchpad
 for_window [instance="xfce4-terminal"] move scratchpad
 for_window [instance="pamac-manager"] floating enable
-for_window [title="wine"] floating enable
+
+for_window [class="mono"] floating enable
+for_window [class="Seafile Client"] floating enable
+for_window [class="Blueman-manager"] floating enable
 
 # Disable Borders
 for_window [class="^.*"] border pixel 5
@@ -300,6 +295,10 @@ for_window [class="Thunderbird"] move container to workspace $workspace9
 for_window [class="Hexchat"] move container to workspace $workspace9
 for_window [class="Seafile Client"] move container to workspace $workspace10
 
+# Application specific scratchpad keys
+bindsym $mod+Shift+Return [instance="xfce4-terminal"] scratchpad show
+bindsym $mod+k [instance="keepass"] scratchpad show
+
 # Start-up / reload applications
 #exec_always --no-startup-id $HOME/.bin/scripts/monitor-setup.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
@@ -310,17 +309,16 @@ exec_always --no-startup-id xmodmap ~/.Xmodmap
 # Start-up applications
 exec --no-startup-id /usr/lib/notification-daemon-1.0/notification-daemon
 exec --no-startup-id conky
-exec --no-startup-id compton --config ~/.config/i3/compton.conf -b
+exec --no-startup-id picom 
 exec --no-startup-id keepass
 exec --no-startup-id xfce4-terminal
 exec --no-startup-id termite
 exec --no-startup-id nm-applet
-exec --no-startup-id redshift-fix
+exec --no-startup-id redshift-fix #exec_always --no-startup-id redshift-gtk -t 6500:4600
 exec --no-startup-id blueman-applet
-#exec_always --no-startup-id redshift-gtk -t 6500:4600
 
 # i3-gabs config
 smart_borders on
 #smart_gaps on
-gaps inner 16
-gaps outer -4
+#gaps inner 16
+#gaps outer -4
